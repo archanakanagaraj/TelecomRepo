@@ -40,14 +40,14 @@ public class ProductsSearchController {
 	@ApiOperation(value = "Retrieve all Products from Database")
 	public List<Product> getAllProducts() {
 
-		log.debug("getAllProducts");
+		System.out.println("getAllProducts");
 		List<Product> products = productSearchSrvc.retrieveAll();
 		return products;// productsSearchUtils.toJson(products);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json", path = "/list")
 	public List<String> listProductNames() {
-		log.debug("listProductNames: ");
+		System.out.println("listProductNames: ");
 
 		List<String> products = productSearchSrvc.retrieveProductNames();
 		return products;

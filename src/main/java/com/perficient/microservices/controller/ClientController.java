@@ -41,9 +41,8 @@ public class ClientController {
 	@ApiOperation(value = "Create Client", notes = "Create Client")
 	public Client createClient(@RequestBody Client client) {
 		System.out.println("Inside Controller - createClient");
-		System.out.println("Client Details::"+client.toString());
 		Client client1 = clientService.createClient(client);
-		System.out.println("Client Details::"+client1.toString());
+		System.out.println("Client Details returned for :"+ client1.getName() + " - " + client1.getCompany());
 		return client1;
 	}
 	
@@ -67,6 +66,22 @@ public class ClientController {
 		System.out.println("Inside Controller - updateStatus: "+ client.getStatus());
 		kafkaService.updateClientStatus(client);
 		
+	}
+
+	public ClientService getClientService() {
+		return clientService;
+	}
+
+	public void setClientService(ClientService clientService) {
+		this.clientService = clientService;
+	}
+
+	public KafkaService getKafkaService() {
+		return kafkaService;
+	}
+
+	public void setKafkaService(KafkaService kafkaService) {
+		this.kafkaService = kafkaService;
 	}
 	
 	
