@@ -55,16 +55,20 @@ public class ProductsSearchController {
 
 	@RequestMapping(method = RequestMethod.GET, path = "/search/id/{id}", produces = "application/json")
 	@ApiOperation(value = "Retrieve a Product from DB based on its ID")
-	public String findProductByID(@PathVariable("id") String id) {
+	public Product findProductByID(@PathVariable("id") String id) {
+		System.out.println("In findProductByID for id:::"+id);
+		return productSearchSrvc.find(id);
 
-		return productsSearchUtils.toJson(productSearchSrvc.find(id));
+		//return productsSearchUtils.toJson(productSearchSrvc.find(id));
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/search/name/{name}", produces = "application/json")
 	@ApiOperation(value = "Retrieve a Product from DB based on its name")
-	public String findProductByName(@PathVariable("name") String name) {
-
-		return productsSearchUtils.toJson(productSearchSrvc.findByName(name));
+	public Product findProductByName(@PathVariable("name") String name) {
+		System.out.println("In findProductByName for name:::"+name);
+		return productSearchSrvc.findByName(name);
+		
+		//return productsSearchUtils.toJson(productSearchSrvc.findByName(name));
 	}
 
 	@RequestMapping(path = "/delete/{id}", produces = "application/json")
@@ -105,6 +109,14 @@ public class ProductsSearchController {
 
 		Product productInserted = productSearchSrvc.create(p);
 		return productInserted;
+	}
+
+	public ProductsSearchService getProductSearchSrvc() {
+		return productSearchSrvc;
+	}
+
+	public void setProductSearchSrvc(ProductsSearchService productSearchSrvc) {
+		this.productSearchSrvc = productSearchSrvc;
 	}
 
 }
